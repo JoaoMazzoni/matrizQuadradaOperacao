@@ -4,6 +4,7 @@ int qtdcolunas = tamanho;
 int[,] matriz = new int[qtdlinhas, qtdcolunas];
 int [] resultadoLinha = new int[tamanho];
 
+
 for (int linha = 0; linha < qtdlinhas; linha++)
 {
     for (int coluna = 0; coluna < qtdcolunas; coluna++)
@@ -21,23 +22,70 @@ for (int linha = 0; linha < qtdlinhas; linha++)
     }
 }
 
+
+Console.WriteLine();
 //Soma Linhas
 
+Console.WriteLine("\nResultado - Soma das Linhas: ");
 for (int linha = 0; linha < qtdlinhas; linha++)
 {
     Console.WriteLine();
+    float resultado = 0;
     for (int coluna = 0; coluna < qtdcolunas; coluna++)
     {
-
-    resultadoLinha [linha] = matriz[linha,coluna] + matriz[linha, coluna];
-
+        if(linha < qtdlinhas)
+        {
+            resultado += matriz[linha, coluna];
+            if (qtdcolunas - 1 == coluna)
+            {
+                Console.Write(resultado + " ");
+            }
+        }
+       
     }  
 }
 
-Console.WriteLine();
-for (int i = 0; i < tamanho; i++)
+Console.ReadLine();
 
+//Soma Colunas
+Console.WriteLine("\nResultado - Soma das Colunas: ");
+
+for (int linha = 0; linha < qtdlinhas; linha++)
 {
-    Console.WriteLine(resultadoLinha[i] + i+1);
+    float resultado = 0;  
+    for(int coluna = 0; coluna < qtdcolunas; coluna++)
+    {
+        resultado += matriz[coluna, linha];
+    }
+
+    Console.WriteLine(resultado);
 }
 
+Console.ReadLine();
+
+
+
+//Soma das Diagonais
+
+Console.WriteLine("\nResultado - Soma das Diagonais: \n");
+
+
+
+//Diagonal Principal
+float diag = 0;
+for (int linha = 0; linha < qtdlinhas; linha++)
+{
+    diag += matriz[linha, linha];
+
+}
+Console.WriteLine(diag);
+
+//Diagonal Secundária
+diag = 0;
+int auxLinha = 0;
+for (int coluna = qtdcolunas - 1; coluna >= 0; coluna--)
+{
+    diag += matriz[auxLinha, coluna];
+    auxLinha++;
+}
+Console.WriteLine(diag);
