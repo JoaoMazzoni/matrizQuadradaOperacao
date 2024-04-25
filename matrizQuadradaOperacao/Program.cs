@@ -1,91 +1,110 @@
-﻿int tamanho = 3;
-int qtdlinhas = tamanho;
-int qtdcolunas = tamanho;
+﻿int tamanho = 0;
+int qtdlinhas;
+int qtdcolunas;
+
+void definirTamanhoMatriz()
+{
+    Console.Write("Digite o tamanho da matriz: ");
+    tamanho = int.Parse(Console.ReadLine());
+    qtdlinhas = tamanho;
+    qtdcolunas = tamanho;
+}
+definirTamanhoMatriz();
 int[,] matriz = new int[qtdlinhas, qtdcolunas];
-int [] resultadoLinha = new int[tamanho];
 
-
-for (int linha = 0; linha < qtdlinhas; linha++)
+void sortearMatriz(int[,] matriz)
 {
-    for (int coluna = 0; coluna < qtdcolunas; coluna++)
+
+    for (int linha = 0; linha < qtdlinhas; linha++) //Laço da linha
     {
-        matriz[linha, coluna] = new Random().Next(1, 10);
-    }
-}
-
-for (int linha = 0; linha < qtdlinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdcolunas; coluna++)
-    {
-        Console.Write(matriz[linha, coluna] + "| ");
-    }
-}
-
-
-Console.WriteLine();
-//Soma Linhas
-
-Console.WriteLine("\nResultado - Soma das Linhas: ");
-for (int linha = 0; linha < qtdlinhas; linha++)
-{
-    Console.WriteLine();
-    float resultado = 0;
-    for (int coluna = 0; coluna < qtdcolunas; coluna++)
-    {
-        if(linha < qtdlinhas)
+        for (int coluna = 0; coluna < qtdcolunas; coluna++) //Laço da coluna
         {
-            resultado += matriz[linha, coluna];
-            if (qtdcolunas - 1 == coluna)
-            {
-                Console.Write(resultado + " ");
-            }
+            matriz[linha, coluna] = new Random().Next(0, 10);
         }
-       
-    }  
-}
-
-Console.ReadLine();
-
-//Soma Colunas
-Console.WriteLine("\nResultado - Soma das Colunas: ");
-
-for (int linha = 0; linha < qtdlinhas; linha++)
-{
-    float resultado = 0;  
-    for(int coluna = 0; coluna < qtdcolunas; coluna++)
-    {
-        resultado += matriz[coluna, linha];
     }
-
-    Console.WriteLine(resultado);
+    imprimirMatriz(matriz, "\n\nMatriz Gerada\n");
 }
-
-Console.ReadLine();
-
-
-
-//Soma das Diagonais
-
-Console.WriteLine("\nResultado - Soma das Diagonais: \n");
-
-
-
-//Diagonal Principal
-float diag = 0;
-for (int linha = 0; linha < qtdlinhas; linha++)
+void imprimirMatriz(int[,] matriz, string titulo)
 {
-    diag += matriz[linha, linha];
+    Console.WriteLine(titulo);
 
+    for (int linha = 0; linha < qtdlinhas; linha++)
+    {
+        Console.WriteLine();
+
+        for (int coluna = 0; coluna < qtdcolunas; coluna++)
+        {
+            Console.Write(matriz[linha, coluna] + "| ");
+        }
+
+    }
 }
-Console.WriteLine(diag);
+void somarLinhas(int[,] matriz)
+{
+    Console.WriteLine("\n\nResultado - Soma das Linhas: ");
+    for (int linha = 0; linha < qtdlinhas; linha++)
+    {
+        Console.WriteLine();
+        float resultado = 0;
+        for (int coluna = 0; coluna < qtdcolunas; coluna++)
+        {
+            if (linha < qtdlinhas)
+            {
+                resultado += matriz[linha, coluna];
+                if (qtdcolunas - 1 == coluna)
+                {
+                    Console.Write(resultado + " ");
+                }
+            }
 
-//Diagonal Secundária
-diag = 0;
+        }
+    }
+}
+void somarColunas(int[,] matriz)
+{
+    Console.WriteLine("\n\nResultado - Soma das Colunas: \n");
+
+    for (int linha = 0; linha < qtdlinhas; linha++)
+    {
+        float resultado = 0;
+        for (int coluna = 0; coluna < qtdcolunas; coluna++)
+        {
+            resultado += matriz[coluna, linha];
+        }
+
+        Console.WriteLine(resultado);
+    }
+}
+void somarDiagonalPrincipal(int[,] matriz)
+{
+
+
+    Console.WriteLine("\nResultado - Soma das Diagonais: \n");
+
+    //Diagonal Principal
+    float diag = 0;
+    for (int linha = 0; linha < qtdlinhas; linha++)
+    {
+        diag += matriz[linha, linha];
+
+    }
+    Console.WriteLine(diag);
+}
+void somarDiagonalSecundaria(int[,] matriz)
+{ 
+float diag = 0;
 int auxLinha = 0;
 for (int coluna = qtdcolunas - 1; coluna >= 0; coluna--)
 {
-    diag += matriz[auxLinha, coluna];
-    auxLinha++;
+        diag += matriz[auxLinha, coluna];
+        auxLinha++;
+    }
+    Console.WriteLine(diag);
 }
-Console.WriteLine(diag);
+
+
+sortearMatriz(matriz);
+somarLinhas(matriz);
+somarColunas(matriz);
+somarDiagonalPrincipal(matriz);
+somarDiagonalSecundaria(matriz);
