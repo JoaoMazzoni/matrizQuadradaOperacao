@@ -91,11 +91,11 @@ void somarDiagonalPrincipal(int[,] matriz)
     Console.WriteLine(diag);
 }
 void somarDiagonalSecundaria(int[,] matriz)
-{ 
-float diag = 0;
-int auxLinha = 0;
-for (int coluna = qtdcolunas - 1; coluna >= 0; coluna--)
 {
+    float diag = 0;
+    int auxLinha = 0;
+    for (int coluna = qtdcolunas - 1; coluna >= 0; coluna--)
+    {
         diag += matriz[auxLinha, coluna];
         auxLinha++;
     }
